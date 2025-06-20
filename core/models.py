@@ -3,7 +3,7 @@ from users.models import User
 
 
 # Create your models here.
-class Category(models.model):
+class Category(models.Model):
     title = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -11,7 +11,7 @@ class Category(models.model):
     def __str__(self):
         return self.title
     
-class Course(models.model):
+class Course(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     banner = models.ImageField(upload_to='course_banners/')
@@ -27,7 +27,7 @@ class Course(models.model):
         return self.title
     
 
-class Lesson(models.model):
+class Lesson(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     video = models.FileField(upload_to='lesson_videos/')
@@ -38,7 +38,7 @@ class Lesson(models.model):
     def __str__(self):
         return self.title
     
-class Material(models.model):
+class Material(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     file_type = models.CharField(max_length=100)
@@ -51,7 +51,7 @@ class Material(models.model):
     def __str__(self):
         return self.title
     
-class Enrollment(models.model):
+class Enrollment(models.Model):
     student_id = models.ForeignKey(User, on_delete=models.CASCADE,limit_choices_to={'role':'student'})
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
@@ -70,7 +70,7 @@ class Enrollment(models.model):
         return f"{self.student_id.username} - {self.course_id.title}"
     
 
-class QuestionAnswer(models.model):
+class QuestionAnswer(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     lesson_id = models.ForeignKey(Lesson,on_delete=models.CASCADE)
     description = models.TextField()
