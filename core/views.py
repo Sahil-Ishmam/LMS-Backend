@@ -8,6 +8,7 @@ from .serializers import CategorySerializers,CourseSerializers,LessonSerializers
 # Create your views here.
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def category_list_create(request):
     if request.method == 'GET':
         categories = Category.objects.all()
@@ -28,6 +29,7 @@ def category_list_create(request):
 
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def course_list_create(request):
     if request.method == 'GET':
         if request.user.role  in ['admin','student']:
@@ -57,6 +59,7 @@ def course_list_create(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def course_detail(request,pk):
     try:
         course = Course.objects.get(pk=pk)
@@ -87,6 +90,7 @@ def course_detail(request,pk):
 
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def lesson_list_create(request):
     if request.method == 'GET':
         categories = Lesson.objects.all()
@@ -106,6 +110,7 @@ def lesson_list_create(request):
 
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def material_list_create(request):
     if request.method == 'GET':
         categories = Material.objects.all()
@@ -125,6 +130,7 @@ def material_list_create(request):
 
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def enrollment_list_create(request):
     if request.method == 'GET':
         categories = Enrollment.objects.all()
@@ -142,6 +148,7 @@ def enrollment_list_create(request):
 
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def questionanswer_list_create(request):
     if request.method == 'GET':
         categories = QuestionAnswer.objects.all()
